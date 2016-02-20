@@ -1,9 +1,12 @@
+# Please don't actually read this file, this is a horror show
+
 CPP_FILES := $(wildcard modules/*.cpp)
 OBJ_FILES := $(addprefix bin/,$(notdir $(CPP_FILES:.cpp=.o)))
 
-TOBJ_FILES := $(addprefix bin/,$(notdir $(wildcard bin/*.o)))
+TEST_FILES := $(wildcard tests/*.cpp)
+TOBJ_FILES := $(TEST_FILES:.cpp=.o)
 
-CC_FLAGS := -g
+CC_FLAGS := -std=c++11
 
 raytracer: $(OBJ_FILES)
 	g++ -o $@ main.cpp $^
@@ -11,10 +14,15 @@ raytracer: $(OBJ_FILES)
 bin/%.o: modules/%.cpp
 	g++ $(CC_FLAGS) -c -o $@ $<
 
-test: raytracer
-	g++ -c -o tests/headers.o tests/headers.cpp
-	g++ -c -o tests/vectors.o tests/vectors.cpp
-	g++ -o runTests tests/headers.o tests/vectors.o $(TOBJ_FILES)
+tests: test
+
+test: raytracer testdep
+
+testdep: $(TOBJ_FILES)
+	g++ -o runTests $^ $(addprefix bin/,$(notdir $(wildcard bin/*.o)))
+
+tests/%.o: tests/%.cpp
+	g++ $(CC_FLAGS) -c -o $@ $<
 
 clean:
 	rm -f bin/*.o
