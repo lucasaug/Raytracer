@@ -1,3 +1,5 @@
 # Object files
 bin/*.o
 tests/*.o
+raytracer
+runTests
