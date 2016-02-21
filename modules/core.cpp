@@ -70,10 +70,12 @@ Ray::Ray(const Vector& point, const Vector& dir) {
 LocalGeo::LocalGeo() {
     this->pos.x = this->pos.y = this->pos.z = 0;
     this->normal.x = this->normal.y = this->normal.z = 0;
+    this->normal.normalize();
 }
 LocalGeo::LocalGeo(Vector position, Vector norm) {
     this->pos = position;
     this->normal = norm;
+    this->normal.normalize();
 }
 
 // MATRIX CLASS
@@ -279,6 +281,7 @@ LocalGeo Transformation::operator* (LocalGeo& local) {
             normal[i] += this->m.mat[i][j] * local.normal[j];
         }
     }
+    normal.normalize();
     result.normal = normal;
     this->m.transpose();
     this->swap();

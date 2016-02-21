@@ -78,24 +78,62 @@ TEST_CASE("Matrix and Transformation work as expected") {
     }
 
     SECTION("Scaling works") {
-        transf.scale(Vector(1,1,1));
+        transf.scale(Vector(2,1.5,0.5));
         Matrix prod = transf.minv * transf.m;
         CHECK(prod == id);
 
-        
+        Vector vec = Vector(5,2,9);
+        vec = transf * vec;
+        CHECK(vec == Vector(10,3,4.5));
+
+        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        ray = transf * ray;
+        CHECK(ray.point == Vector(2,1.5,0.5));
+        CHECK(ray.dir   == Vector(0, 1.5, 0));
+
+        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        local = transf * local;
+        CHECK(local.pos    == Vector(2,1.5,0.5));
+        CHECK(local.normal == Vector(0, 1, 0));
     }
 
-    /*SECTION("Rotation works") {
-        transf.rotate(Vector(1,1,1));
+    SECTION("Rotation works") { // TODO
+        transf.rotate(Vector(1, 0, 0), M_PI_2);
         Matrix prod = transf.minv * transf.m;
         CHECK(prod == id);
-        
+
+        Vector vec = Vector(5,2,9);
+        vec = transf * vec;
+        CHECK(vec == Vector(10,3,4.5));
+
+        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        ray = transf * ray;
+        CHECK(ray.point == Vector(2,1.5,0.5));
+        CHECK(ray.dir   == Vector(0, 1.5, 0));
+
+        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        local = transf * local;
+        CHECK(local.pos    == Vector(2,1.5,0.5));
+        CHECK(local.normal == Vector(0, 1, 0));
     }
 
     SECTION("Translation works") {
-        transf.translate(Vector(1,1,1));
+        transf.scale(Vector(2,1.5,0.5));
         Matrix prod = transf.minv * transf.m;
         CHECK(prod == id);
-        
-    }*/
+
+        Vector vec = Vector(5,2,9);
+        vec = transf * vec;
+        CHECK(vec == Vector(10,3,4.5));
+
+        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        ray = transf * ray;
+        CHECK(ray.point == Vector(2,1.5,0.5));
+        CHECK(ray.dir   == Vector(0, 1.5, 0));
+
+        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        local = transf * local;
+        CHECK(local.pos    == Vector(2,1.5,0.5));
+        CHECK(local.normal == Vector(0, 1, 0));
+    }
 }
