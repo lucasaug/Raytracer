@@ -86,54 +86,55 @@ TEST_CASE("Matrix and Transformation work as expected") {
         vec = transf * vec;
         CHECK(vec == Vector(10,3,4.5));
 
-        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        Ray ray = Ray(Vector(1,1,1), Vector(0,1,0));
         ray = transf * ray;
         CHECK(ray.point == Vector(2,1.5,0.5));
         CHECK(ray.dir   == Vector(0, 1.5, 0));
 
-        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0,1,0));
         local = transf * local;
         CHECK(local.pos    == Vector(2,1.5,0.5));
-        CHECK(local.normal == Vector(0, 1, 0));
+        CHECK(local.normal == Vector(0,1,0));
     }
 
-    SECTION("Rotation works") { // TODO
-        transf.rotate(Vector(1, 0, 0), M_PI_2);
+    SECTION("Rotation works") {
+        transf.rotate(Vector(1,0,0), M_PI_2);
         Matrix prod = transf.minv * transf.m;
         CHECK(prod == id);
 
-        Vector vec = Vector(5,2,9);
+        Vector vec = Vector(0,1,0);
         vec = transf * vec;
-        CHECK(vec == Vector(10,3,4.5));
+        CHECK(vec == Vector(0,0,1));
 
-        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        Ray ray = Ray(Vector(1,0,0), Vector(0,1,0));
         ray = transf * ray;
-        CHECK(ray.point == Vector(2,1.5,0.5));
-        CHECK(ray.dir   == Vector(0, 1.5, 0));
+        CHECK(ray.point == Vector(1,0,0));
+        CHECK(ray.dir   == Vector(0,0,1));
 
-        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        LocalGeo local = LocalGeo(Vector(0,0,1), Vector(0,1,0));
         local = transf * local;
-        CHECK(local.pos    == Vector(2,1.5,0.5));
-        CHECK(local.normal == Vector(0, 1, 0));
+        CHECK(local.pos    == Vector(0,-1,0));
+        CHECK(local.normal == Vector(0,0,1));
     }
 
     SECTION("Translation works") {
-        transf.scale(Vector(2,1.5,0.5));
+        transf.translate(Vector(2,1.5,0.5));
         Matrix prod = transf.minv * transf.m;
         CHECK(prod == id);
 
         Vector vec = Vector(5,2,9);
         vec = transf * vec;
-        CHECK(vec == Vector(10,3,4.5));
+        CHECK(vec == Vector(7,3.5,9.5));
+        std::cout << vec.x << " " << vec.y << " " << vec.z;
 
-        Ray ray = Ray(Vector(1,1,1), Vector(0, 1, 0));
+        Ray ray = Ray(Vector(1,1,1), Vector(0,1,0));
         ray = transf * ray;
-        CHECK(ray.point == Vector(2,1.5,0.5));
-        CHECK(ray.dir   == Vector(0, 1.5, 0));
+        CHECK(ray.point == Vector(3,2.5,1.5));
+        CHECK(ray.dir   == Vector(0,1,0));
 
-        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0, 1, 0));
+        LocalGeo local = LocalGeo(Vector(1,1,1), Vector(0,1,0));
         local = transf * local;
-        CHECK(local.pos    == Vector(2,1.5,0.5));
-        CHECK(local.normal == Vector(0, 1, 0));
+        CHECK(local.pos    == Vector(3,2.5,1.5));
+        CHECK(local.normal == Vector(0,1,0));
     }
 }

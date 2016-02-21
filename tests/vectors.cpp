@@ -1,8 +1,6 @@
 #include "../include/catch.hpp"
 #include "../headers/core.hpp"
 
-#include <iostream>
-
 /* Unit tests for Vector class */
 
 TEST_CASE("Vector operations work as expected") {

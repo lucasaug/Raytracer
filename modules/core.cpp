@@ -1,6 +1,8 @@
 #include "../headers/core.hpp"
 #include <cmath>
 
+#define RT_EPSILON 0.0001
+
 using namespace std;
 
 // VECTOR CLASS
@@ -16,7 +18,9 @@ Vector::Vector(float x, float y, float z) {
 }
 
 bool Vector::operator== (const Vector& op) {
-    return this->x == op.x && this->y == op.y && this->z == op.z;
+    return (this->x <= op.x + RT_EPSILON && this->x >= op.x - RT_EPSILON) && 
+           (this->y <= op.y + RT_EPSILON && this->y >= op.y - RT_EPSILON) &&
+           (this->z <= op.z + RT_EPSILON && this->z >= op.z - RT_EPSILON);
 }
 bool Vector::operator!= (const Vector& op) {
     return !(*(this) == op);
@@ -135,6 +139,7 @@ void Matrix::rotate(Vector axis, float theta) {
     third.mat[2][1] = axis.x;
 
     *(this) = first * cos(theta) + second * (1 - cos(theta)) + third * (sin(theta));
+    (*this).mat[3][3] = 1;
 }
 void Matrix::translate(Vector amount) {
     this->identity();
@@ -146,7 +151,8 @@ void Matrix::translate(Vector amount) {
 bool Matrix::operator== (const Matrix& cmp){
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
-            if(this->mat[i][j] != cmp.mat[i][j]) return false;
+            if((this->mat[i][j] > cmp.mat[i][j] + RT_EPSILON) || (this->mat[i][j] < cmp.mat[i][j] - RT_EPSILON))
+                return false;
         }
     }
     return true;
@@ -185,7 +191,7 @@ Matrix Matrix::operator* (const Matrix& op) {
     for(int i = 0; i < 4; i++) {
         for(int j = 0; j < 4; j++) {
             for(int k = 0; k < 4; k++) {
-            res.mat[i][j] += (*this).mat[i][k] * op.mat[k][j];
+                res.mat[i][j] += (*this).mat[i][k] * op.mat[k][j];
             }
         }
     }
@@ -249,8 +255,8 @@ void Transformation::translate(Vector amount) {
 Vector Transformation::operator* (Vector& vec) {
     Vector result;
     for(int i = 0; i < 3; i++) {
-        result[i] = this->m.mat[i][3];
-        for(int j = 0; j < 4; j++) {
+        result[i] = this->m.mat[i][3]/this->m.mat[3][3];
+        for(int j = 0; j < 3; j++) {
             result[i] += this->m.mat[i][j] * vec[j];
         }
     }
@@ -262,7 +268,7 @@ Ray Transformation::operator* (Ray& ray) {
     Vector dir;
     for(int i = 0; i < 3; i++) {
         dir[i] = 0;
-        for(int j = 0; j < 4; j++) {
+        for(int j = 0; j < 3; j++) {
             dir[i] += this->m.mat[i][j] * ray.dir[j];
         }
     }
@@ -277,7 +283,7 @@ LocalGeo Transformation::operator* (LocalGeo& local) {
     Vector normal;
     for(int i = 0; i < 3; i++) {
         normal[i] = 0;
-        for(int j = 0; j < 4; j++) {
+        for(int j = 0; j < 3; j++) {
             normal[i] += this->m.mat[i][j] * local.normal[j];
         }
     }
