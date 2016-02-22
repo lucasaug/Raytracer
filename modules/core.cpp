@@ -1,3 +1,5 @@
+/* Definition of the basic core classes */
+
 #include "../headers/core.hpp"
 #include <cmath>
 
@@ -55,6 +57,15 @@ void Vector::normalize(void) {
         this->y /= len;
         this->z /= len;
     }
+    return *(this);
+}
+float Vector::dot(Vector op) {
+    return (this->x * op.x) + (this->y * op.y) + (this->z * op.z);
+}
+Vector Vector::cross(Vector op) {
+    return Vector(this->y * op.z - this->z * op.y,
+                  this->z * op.x - this->x * op.z,
+                  this->x * op.y - this->y * op.x);
 }
 float Vector::getLength() {
     return sqrt(pow(this->x, 2) + pow(this->y, 2) + pow(this->z, 2));

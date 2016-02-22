@@ -1,5 +1,9 @@
 /* Core classes needed for all operations (implementation on vector, matrices, etc) */
 
+#ifndef LAFO_RAYTRACER_CORE
+
+#define LAFO_RAYTRACER_CORE
+
 class Vector {
     public:
 
@@ -17,8 +21,10 @@ class Vector {
     Vector operator/  (const float&);
     float& operator[] (int);
 
-    void  normalize(void);
-    float getLength();
+    void   normalize(void);
+    float  dot(Vector);
+    Vector cross(Vector);
+    float  getLength();
 };
 
 class Ray {
@@ -100,3 +106,5 @@ class Sample {
     Sample();
     Sample(float, float);
 };
+
+#endif

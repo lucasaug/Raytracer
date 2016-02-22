@@ -1,3 +1,5 @@
+/* Parses the file for instructions */
+
 #include <iostream>
 #include <string>
 

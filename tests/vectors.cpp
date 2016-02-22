@@ -55,6 +55,16 @@ TEST_CASE("Vector operations work as expected") {
         CHECK(v.x == 0);
         CHECK(v.y == 0);
         CHECK(v.z == 0);
+    }
 
+    SECTION("Dot and cross products work") {
+        float dotResult = v.dot(Vector(2,3,4));
+        CHECK(dotResult == 9);
+
+        v.x = 1;
+        v.y = 0;
+        v.z = 0;
+        Vector crossResult = v.cross(Vector(0,0,1));
+        CHECK(crossResult == Vector(0,-1,0));
     }
 }

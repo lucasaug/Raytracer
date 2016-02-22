@@ -1,7 +1,11 @@
 /* readfile.h - Refer to readfile.cpp for more information */
 
+#ifndef LAFO_RAYTRACER_READFILE
+
+#define LAFO_RAYTRACER_READFILE
+
 #include <string>
 
-using namespace std;
+void readFile(std::string inFile);
 
-void readFile(string inFile);
+#endif

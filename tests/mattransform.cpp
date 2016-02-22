@@ -1,8 +1,6 @@
 #include "../include/catch.hpp"
 #include "../headers/core.hpp"
 
-#include <iostream>
-
 /* Unit tests for Matrix and Transformation classes */
 
 TEST_CASE("Matrix and Transformation work as expected") {
@@ -125,7 +123,6 @@ TEST_CASE("Matrix and Transformation work as expected") {
         Vector vec = Vector(5,2,9);
         vec = transf * vec;
         CHECK(vec == Vector(7,3.5,9.5));
-        std::cout << vec.x << " " << vec.y << " " << vec.z;
 
         Ray ray = Ray(Vector(1,1,1), Vector(0,1,0));
         ray = transf * ray;
