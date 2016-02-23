@@ -50,7 +50,7 @@ float& Vector::operator[] (int i) {
     return this->z;
 }
 
-void Vector::normalize(void) {
+Vector Vector::normalize(void) {
     if(this->getLength() != 0) {
         float len = this->getLength();
         this->x /= len;

@@ -31,10 +31,10 @@ class Sampler {
 class Camera {
     public:
 
-    Vector pos, lookDir, upDir;
-    float fovy;
+    Vector pos, lookDir, upDir, rightDir;
+    float width, height, fovy;
 
-    Camera(Vector, Vector, Vector, float);
+    Camera(Vector, Vector, Vector, float, float, float);
 
     void generateRay(Sample& sample, Ray* ray);
 };

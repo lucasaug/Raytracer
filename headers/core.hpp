@@ -21,7 +21,7 @@ class Vector {
     Vector operator/  (const float&);
     float& operator[] (int);
 
-    void   normalize(void);
+    Vector normalize(void);
     float  dot(Vector);
     Vector cross(Vector);
     float  getLength();

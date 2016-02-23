@@ -5,16 +5,26 @@
  *                                              *
  ************************************************/
 
+#include <cmath>
+
 #include "../headers/core.hpp"
 #include "../headers/rendering.hpp"
 
-Camera::Camera(Vector eye, Vector lookAt, Vector up, float fovy) {
+Camera::Camera(Vector eye, Vector lookAt, Vector up, float width, float height, float fovy) {
     this->pos = eye;
     this->lookDir = (lookAt - eye).normalize();
-    this->upDir = this->lookDir.cross(up).cross(this->lookDir).normalize();
+    this->rightDir = this->lookDir.cross(up).normalize();
+    this->upDir = this->rightDir.cross(this->lookDir).normalize();
+    this->width = width;
+    this->height = height;
     this->fovy = fovy;
 }
 
-void generateRay(Sample& sample, Ray* ray) {
-    
+void Camera::generateRay(Sample& sample, Ray* ray) {
+    float alpha = tan(this->fovy/2) * (sample.x - (this->width/2)) / (this->width/2);
+    float beta  = tan(this->fovy/2) * ((this->height/2) - sample.y) / (this->width/2);
+
+    ray->point = this->pos;
+    ray->dir   = this->rightDir * alpha + this->upDir * beta + this->lookDir;
+    ray->dir.normalize();
 }
