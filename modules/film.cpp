@@ -20,9 +20,9 @@ Film::Film(int width, int height) {
 
 void Film::commit(Sample& sample, Vector& color) {
     int position = ((sample.y * this->width) + sample.x);
-    this->pixels[(3*position) + 0] = color.x;
+    this->pixels[(3*position) + 0] = color.z;
     this->pixels[(3*position) + 1] = color.y;
-    this->pixels[(3*position) + 2] = color.z;
+    this->pixels[(3*position) + 2] = color.x;
 }
 void Film::writeImage(std::string name) {
     FreeImage_Initialise();

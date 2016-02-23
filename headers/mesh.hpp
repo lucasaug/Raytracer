@@ -21,7 +21,8 @@ class Light;
 
 enum ShapeType {
     TRIANGLE,
-    SPHERE
+    SPHERE,
+    NONE
 };
 
 enum LightType {
@@ -47,6 +48,7 @@ class Shape {
 
     Shape(ShapeType, Vector, float);
     Shape(ShapeType, Vector*);
+    Shape();
 
     bool intersect(Ray&, float*, LocalGeo*);
 };
@@ -66,6 +68,9 @@ class GeometricPrimitive {
     Shape shape;
     BRDF material;
     Transformation objToWorld, worldToObj;
+
+    GeometricPrimitive(ShapeType, Vector, float);
+    GeometricPrimitive(ShapeType, Vector*);
 
     bool intersect(Ray&, float*, Intersection*);
 };

@@ -54,9 +54,9 @@ class Camera {
 class RayTracer {
     public:
 
-    std::vector<GeometricPrimitive> objects;
+    std::vector<GeometricPrimitive*> objects;
 
-    void addObject(GeometricPrimitive);
+    void addObject(GeometricPrimitive*);
 
     void trace(Ray&, Vector*);
 };
@@ -78,7 +78,7 @@ class Scene {
     public:
     RayTracer tracer;
 
-    void addObject(GeometricPrimitive);
+    void addObject(GeometricPrimitive*);
     void render(Camera, int, int);
 };
 

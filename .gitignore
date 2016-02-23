@@ -3,3 +3,5 @@ bin/*.o
 tests/*.o
 raytracer
 runTests
+*.png
+*.log

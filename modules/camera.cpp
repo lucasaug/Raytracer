@@ -7,6 +7,7 @@
  ************************************************/
 
 #include <cmath>
+ #include <iostream>
 
 #include "../headers/core.hpp"
 #include "../headers/rendering.hpp"
@@ -28,4 +29,5 @@ void Camera::generateRay(Sample& sample, Ray* ray) {
     ray->point = this->pos;
     ray->dir   = this->rightDir * alpha + this->upDir * beta + this->lookDir;
     ray->dir.normalize();
+    std::cout << ray->dir.x << " " << ray->dir.y << " " << ray->dir.z << "\n";
 }

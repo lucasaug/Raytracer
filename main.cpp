@@ -10,18 +10,17 @@
 
 using namespace std;
 
-#define WIDTH 100
-#define HEIGHT 100
+#define WIDTH 500
+#define HEIGHT 500
 
 int main() {
     Scene scene;
-    GeometricPrimitive obj;
-    obj.shape = Shape(SPHERE, Vector(0,0,-10), 2);
+    GeometricPrimitive obj = GeometricPrimitive(SPHERE, Vector(0,0, -100), 20);
 
-    Camera cam(Vector(0,0,0), Vector(0,0,-1), Vector(0,1,0), WIDTH, HEIGHT, M_PI_4);
+    Camera cam(Vector(0,0,0), Vector(0,0,-1), Vector(0,1,0), WIDTH, HEIGHT, M_PI/3);
 
-    scene.addObject(obj);
-    scene.render(camera, WIDTH, HEIGHT);
+    scene.addObject(&obj);
+    scene.render(cam, WIDTH, HEIGHT);
 
     return 0;
 }

@@ -10,7 +10,7 @@
 #include "../headers/mesh.hpp"
 #include "../headers/rendering.hpp"
 
-void Scene::addObject(GeometricPrimitive obj) {
+void Scene::addObject(GeometricPrimitive* obj) {
     this->tracer.addObject(obj);
 }
 
@@ -18,13 +18,12 @@ void Scene::render(Camera cam, int width, int height) {
     Sampler sampler(width, height);
     Sample sample;
     Ray ray;
-    RayTracer raytracer;
     Vector color;
     Film film(width, height);
 
-    while (!sampler.getSample(&sample)) {
+    while(sampler.getSample(&sample)) {
         cam.generateRay(sample, &ray);
-        raytracer.trace(ray, &color);
+        this->tracer.trace(ray, &color);
         film.commit(sample, color);
     }
     film.writeImage("test.png");

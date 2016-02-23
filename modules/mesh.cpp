@@ -19,6 +19,9 @@ Shape::Shape(ShapeType type, Vector* vertices) {
         this->properties.vertices[i] = vertices[i];
     }
 }
+Shape::Shape() {
+    this->type = NONE;
+}
 
 bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
     if(this->type == SPHERE) {
@@ -39,6 +42,9 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
             float x1 = (-1 * b + sqrt(delta)) / (2 * a),
                   x2 = (-1 * b - sqrt(delta)) / (2 * a);
 
+            if(x1 < 0 && x2 < 0)
+                // object behind camera
+                return false;
             if(std::min(x1, x2) <= 0 && std::max(x1, x2) >= 0)
                 // camera inside sphere
                 *thit = std::max(x1,x2);
@@ -52,12 +58,21 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
         }
     } else if(this->type == TRIANGLE) {
         return false;
+    } else if(this->type == NONE) {
+        return false;
     } else {
         throw std::invalid_argument("Unknown shape type" );
     }
 }
 
 // GEOMETRIC PRIMITIVE CLASS
+GeometricPrimitive::GeometricPrimitive(ShapeType type, Vector center, float radius) {
+    this->shape = Shape(type, center, radius);
+}
+GeometricPrimitive::GeometricPrimitive(ShapeType type, Vector* vertices) {
+    this->shape = Shape(type, vertices);
+}
+
 bool GeometricPrimitive::intersect(Ray& ray, float* thit, Intersection* hit) {
     LocalGeo interPoint;
     if(this->shape.intersect(ray, thit, &interPoint)) {
