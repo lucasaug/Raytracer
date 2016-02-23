@@ -1,4 +1,5 @@
 /**************************************************
+ *                                                *
  * Definition of the Sampler class                *
  *                                                *
  * Produces samples for the ray generation method *

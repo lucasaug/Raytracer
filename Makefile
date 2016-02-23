@@ -8,8 +8,9 @@ TOBJ_FILES := $(TEST_FILES:.cpp=.o)
 
 CC_FLAGS := -std=c++11
 
+
 raytracer: $(OBJ_FILES)
-	g++ -o $@ main.cpp $^
+	g++ -o $@ main.cpp $^ -lfreeimage
 
 bin/%.o: modules/%.cpp
 	g++ $(CC_FLAGS) -c -o $@ $<

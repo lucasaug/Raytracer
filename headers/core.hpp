@@ -4,6 +4,14 @@
 
 #define LAFO_RAYTRACER_CORE
 
+class Vector;
+class Ray;
+class LocalGeo;
+class Matrix;
+class Transformation;
+class BRDF;
+class Sample;
+
 class Vector {
     public:
 

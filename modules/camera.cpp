@@ -1,4 +1,5 @@
 /************************************************
+ *                                              *
  * Definition of the Camera class               *
  *                                              *
  * Produces the correct rays, given the samples *
