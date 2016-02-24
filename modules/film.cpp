@@ -6,6 +6,8 @@
  *                                                 *
  ***************************************************/
 
+#include <cmath>
+
 #include "../include/FreeImage.h"
 
 #include "../headers/core.hpp"
@@ -19,7 +21,7 @@ Film::Film(int width, int height) {
 }
 
 void Film::commit(Sample& sample, Vector& color) {
-    int position = ((sample.y * this->width) + sample.x);
+    int position = ((floor(sample.y) * this->width) + floor(sample.x));
     this->pixels[(3*position) + 0] = color.z;
     this->pixels[(3*position) + 1] = color.y;
     this->pixels[(3*position) + 2] = color.x;

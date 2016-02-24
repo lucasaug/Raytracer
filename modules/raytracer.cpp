@@ -27,9 +27,9 @@ void RayTracer::trace(Ray& ray, Vector* color) {
         }
     }
     if(hitPos != -1) {
-        (*color).x = 255;
-        (*color).y = (*color).z = 0;
+        color->x = 255;
+        color->y = color->z = 0;
     } else {
-        (*color).x = (*color).y = (*color).z = 0;
+        color->x = color->y = color->z = 0;
     }
 }

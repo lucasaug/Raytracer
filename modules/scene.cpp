@@ -27,4 +27,5 @@ void Scene::render(Camera cam, int width, int height) {
         film.commit(sample, color);
     }
     film.writeImage("test.png");
+    film.cleanUp();
 }
