@@ -17,6 +17,12 @@ int main() {
     Scene scene;
     Vector vertices[3] = {Vector(20,-20,-100), Vector(0,20,-100), Vector(-50,-20,-100)};
     GeometricPrimitive obj = GeometricPrimitive(TRIANGLE, vertices);
+    Transformation transf = Transformation();
+    transf.scale(Vector(1,1,1));
+    obj.objToWorld.m = transf.m;
+    obj.objToWorld.minv = transf.minv;
+    obj.worldToObj.minv = transf.m;
+    obj.worldToObj.m = transf.minv;
 
     Camera cam(Vector(0,0,0), Vector(0,0,-1), Vector(0,1,0), WIDTH, HEIGHT, M_PI/3);
 

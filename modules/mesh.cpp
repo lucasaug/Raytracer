@@ -101,8 +101,9 @@ GeometricPrimitive::GeometricPrimitive(ShapeType type, Vector* vertices) {
 
 bool GeometricPrimitive::intersect(Ray& ray, float* thit, Intersection* hit) {
     LocalGeo interPoint;
-    if(this->shape.intersect(ray, thit, &interPoint)) {
-        hit->localGeo  = interPoint;
+    Ray transfRay = worldToObj * ray;
+    if(this->shape.intersect(transfRay, thit, &interPoint)) {
+        hit->localGeo  = objToWorld * interPoint;
         hit->primitive = this;
         return true;
     } else {
