@@ -44,19 +44,19 @@ class Camera {
     public:
 
     Vector pos, lookDir, upDir, rightDir;
-    float width, height, fovy;
+    int width, height;
+    float fovy;
 
-    Camera(Vector, Vector, Vector, float, float, float);
-
+    void setCamera(Vector, Vector, Vector, int, int, float);
     void generateRay(Sample& sample, Ray* ray);
 };
 
 class RayTracer {
     public:
 
-    std::vector<GeometricPrimitive*> objects;
+    std::vector<GeometricPrimitive> objects;
 
-    void addObject(GeometricPrimitive*);
+    void addObject(GeometricPrimitive);
 
     void trace(Ray&, Vector*);
 };
@@ -77,9 +77,19 @@ class Film {
 class Scene {
     public:
     RayTracer tracer;
+    Camera camera;
+    int width, height;
+    int depth;
+    std::string outputName;
 
-    void addObject(GeometricPrimitive*);
-    void render(Camera, int, int);
+    Scene();
+
+    void setDepth(int);
+    void setOutputName(std::string);
+    void setViewport(int, int);
+    void setCamera(Vector, Vector, Vector, float);
+    void addObject(GeometricPrimitive);
+    void render();
 };
 
 #endif

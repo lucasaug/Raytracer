@@ -86,7 +86,7 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
 
     } else if(this->type == NONE) {
         return false;
-    } else {
+    } else {      
         throw std::invalid_argument("Unknown shape type" );
     }
 }

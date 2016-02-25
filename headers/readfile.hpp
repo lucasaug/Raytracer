@@ -6,6 +6,8 @@
 
 #include <string>
 
-void readFile(std::string inFile);
+#include "rendering.hpp"
+
+void readFile(std::string, Scene&);
 
 #endif

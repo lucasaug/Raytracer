@@ -263,6 +263,11 @@ void Transformation::translate(Vector amount) {
     this->minv = this->minv * transf;
 }
 
+void Transformation::operator= (Transformation& transf) {
+    this->m = transf.m;
+    this->minv = transf.minv;
+}
+
 Vector Transformation::operator* (Vector& vec) {
     Vector result;
     for(int i = 0; i < 3; i++) {
@@ -309,9 +314,10 @@ LocalGeo Transformation::operator* (LocalGeo& local) {
 BRDF::BRDF() {
     this->shininess = 0;
 }
-BRDF::BRDF(Vector kd, Vector ks, Vector ka, float shininess) {
+BRDF::BRDF(Vector kd, Vector ks, Vector ke, Vector ka, float shininess) {
     this->kd = kd;
     this->ks = ks;
+    this->ke = ke;
     this->ka = ka;
     this->shininess = shininess;
 }

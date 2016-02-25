@@ -93,6 +93,7 @@ class Transformation {
     void rotate(Vector, float);
     void translate(Vector);
 
+    void     operator= (Transformation&);
     Vector   operator* (Vector&);
     Ray      operator* (Ray&);
     LocalGeo operator* (LocalGeo&);
@@ -100,11 +101,11 @@ class Transformation {
 
 class BRDF {
     public:
-    Vector kd, ks, ka;
+    Vector kd, ks, ke, ka;
     float shininess;
 
     BRDF();
-    BRDF(Vector, Vector, Vector, float);
+    BRDF(Vector, Vector, Vector, Vector, float);
 };
 
 class Sample {

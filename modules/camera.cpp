@@ -11,7 +11,7 @@
 #include "../headers/core.hpp"
 #include "../headers/rendering.hpp"
 
-Camera::Camera(Vector eye, Vector lookAt, Vector up, float width, float height, float fovy) {
+void Camera::setCamera(Vector eye, Vector lookAt, Vector up, int width, int height, float fovy) {
     this->pos = eye;
     this->lookDir = (lookAt - eye).normalize();
     this->rightDir = this->lookDir.cross(up).normalize();
