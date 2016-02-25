@@ -10,7 +10,7 @@ specular 0 0 0
 
 maxverts 4 
 
-vertex 20 -20 100 
+vertex 20 -20 -100 
 vertex 0 20 -100
 vertex -50 -20 -100
 

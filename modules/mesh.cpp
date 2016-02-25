@@ -72,6 +72,7 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
             return false;
 
         Vector* vertices = this->properties.vertices;
+
         hitLocation->pos = ray.point + (ray.dir * t);
         hitLocation->normal = vertices[0].cross(vertices[1]).normalize();
 

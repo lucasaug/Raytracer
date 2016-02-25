@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 
     Scene scene;
     readFile(string(argv[1]), scene);
-    cout << scene.width << " " << scene.height << "\n";
     
     scene.render();
 
