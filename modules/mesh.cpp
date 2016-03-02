@@ -58,11 +58,11 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
         }
     } else if(this->type == TRIANGLE) {
         // checks interception with plane containing the triangle
-        Vector normal = (this->properties.vertices[2] - this->properties.vertices[0])
-                         .cross(this->properties.vertices[1] - this->properties.vertices[0]);
+        Vector normal = (this->properties.vertices[1] - this->properties.vertices[0])
+                         .cross(this->properties.vertices[2] - this->properties.vertices[0]);
 
-        if(ray.dir.dot(normal) == 0)
-            // normal and ray direction are parallel
+        if(ray.dir.dot(normal) >= 0)
+            // normal and ray direction are perpendicular or facing same direction
             return false;
 
         float t = (this->properties.vertices[0].dot(normal) - ray.point.dot(normal)) / ray.dir.dot(normal);
@@ -74,7 +74,7 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
         Vector* vertices = this->properties.vertices;
 
         hitLocation->pos = ray.point + (ray.dir * t);
-        hitLocation->normal = vertices[0].cross(vertices[1]).normalize();
+        hitLocation->normal = normal;
 
         // checks if the point hit is within the triangle's vertices
         if((vertices[1] - vertices[0]).cross(hitLocation->pos - vertices[0]).dot(hitLocation->normal) >= 0 &&

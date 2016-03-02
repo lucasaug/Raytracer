@@ -27,8 +27,10 @@ void RayTracer::trace(Ray& ray, Vector* color) {
         }
     }
     if(hitPos != -1) {
-        color->x = 255;
-        color->y = color->z = 0;
+        (*color) = (currentInt.primitive->material.ka + currentInt.primitive->material.ke) * 255;
+        color->x > 255 ? 255 : color->x;
+        color->y > 255 ? 255 : color->y;
+        color->z > 255 ? 255 : color->z;
     } else {
         color->x = color->y = color->z = 0;
     }

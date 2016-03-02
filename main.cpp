@@ -25,7 +25,11 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-/*scene.setCamera(Vector(0,0,0), Vector(0,0,-1), Vector(0,1,0), WIDTH, HEIGHT, M_PI/3);
+/*
+#define WIDTH 250
+#define HEIGHT 250
+scene.setViewport(WIDTH, HEIGHT);
+scene.setCamera(Vector(0,0,0), Vector(0,0,-1), Vector(0,1,0), M_PI/3);
     Vector vertices[3] = {Vector(20,-20,-100), Vector(0,20,-100), Vector(-50,-20,-100)};
     GeometricPrimitive obj = GeometricPrimitive(TRIANGLE, vertices);
     Transformation transf = Transformation();
@@ -34,6 +38,6 @@ int main(int argc, char** argv) {
     obj.objToWorld.minv = transf.minv;
     obj.worldToObj.minv = transf.m;
     obj.worldToObj.m = transf.minv;
-    scene.addObject(&obj);
+    scene.addObject(obj);
     GeometricPrimitive obj2 = GeometricPrimitive(SPHERE, Vector(30,0, -50), 20);
-    scene.addObject(&obj2);*/
+    scene.addObject(obj2);*/
