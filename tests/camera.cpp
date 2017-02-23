@@ -13,7 +13,8 @@
 TEST_CASE("Camera works as expected") {
     
     // Parameters: eye, lookAt, up, width, height, fovy
-    Camera cam = Camera(Vector(0,1,0), Vector(1,0,0), Vector(0,1,0), WIDTH, HEIGHT, FOVY);
+    Camera cam;
+    cam.setCamera(Vector(0,1,0), Vector(1,0,0), Vector(0,1,0), WIDTH, HEIGHT, FOVY);
 
     SECTION("Camera properties are correctly set") {
         CHECK(cam.lookDir  == (Vector(1,-1,0)).normalize());

@@ -19,7 +19,7 @@ tests: test
 test: raytracer testdep
 
 testdep: $(TOBJ_FILES)
-	g++ $(CC_FLAGS) -o runTests $^ $(addprefix bin/,$(notdir $(wildcard bin/*.o)))
+	g++ $(CC_FLAGS) -o runTests $^ $(addprefix bin/,$(notdir $(wildcard bin/*.o))) -lfreeimage
 
 tests/%.o: tests/%.cpp
 	g++ $(CC_FLAGS) -c -o $@ $<

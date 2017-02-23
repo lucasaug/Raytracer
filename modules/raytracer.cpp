@@ -26,7 +26,7 @@ void RayTracer::trace(Ray& ray, Vector* color) {
             currentInt = intersect;
         }
     }
-    if(hitPos != -1) {
+    if(hitPos >= 0.0001) {
         (*color) = (currentInt.primitive->material.ka + currentInt.primitive->material.ke) * 255;
         color->x > 255 ? 255 : color->x;
         color->y > 255 ? 255 : color->y;

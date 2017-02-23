@@ -22,8 +22,8 @@ void Camera::setCamera(Vector eye, Vector lookAt, Vector up, int width, int heig
 }
 
 void Camera::generateRay(Sample& sample, Ray* ray) {
-    float alpha = tan(this->fovy/2) * (sample.x - (this->width/2)) / (this->width/2);
-    float beta  = tan(this->fovy/2) * ((this->height/2) - sample.y) / (this->width/2);
+    float alpha = tan(this->fovy/2.0) * (sample.x - (this->width/2.0)) / (this->width/2.0);
+    float beta  = tan(this->fovy/2.0) * ((this->height/2.0) - sample.y) / (this->height/2.0);
 
     ray->point = this->pos;
     ray->dir   = this->rightDir * alpha + this->upDir * beta + this->lookDir;

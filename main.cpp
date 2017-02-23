@@ -13,7 +13,7 @@ using namespace std;
 int main(int argc, char** argv) {
     if(argc < 2) {
         // incorrect number of arguments
-        cerr << "No input file name received";
+        cerr << "usage: raytracer inputfile";
         return 1;
     }
 

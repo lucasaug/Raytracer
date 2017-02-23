@@ -80,6 +80,7 @@ bool Shape::intersect(Ray& ray, float* thit, LocalGeo* hitLocation) {
         if((vertices[1] - vertices[0]).cross(hitLocation->pos - vertices[0]).dot(hitLocation->normal) >= 0 &&
            (vertices[2] - vertices[1]).cross(hitLocation->pos - vertices[1]).dot(hitLocation->normal) >= 0 &&
            (vertices[0] - vertices[2]).cross(hitLocation->pos - vertices[2]).dot(hitLocation->normal) >= 0   ) {
+            *(thit) = t;
             return true;
         } else {
             return false;
